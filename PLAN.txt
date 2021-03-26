@@ -1,0 +1,208 @@
+Tetriminos
+----------
+
+I:
+[][][][]
+Cyan
+
+J:
+[][][]
+    []
+Blue
+
+L:
+[][][]
+[]
+Orange
+
+O:
+[][]
+[][]
+Yellow
+
+s:
+  [][]
+[][]
+Green
+
+T:
+[][][]
+  []
+Purple
+
+Z:
+[][]
+  [][]
+Red
+
+
+Data Structures
+---------------
+
+Colours:
+enum; 0 is CLEAR, 1 = BLUE etc
+
+Board:
+Two-dimensional array of colours, 10 x 20
+
+Piece:
+Strucure with
+	Two-dimensional array, 4 x 4
+	X position
+	Y position
+
+Collision detection is a simple case of checking the arrays line by line.  
+Will need to check collision with edges, unless using arrays of different 
+sizes.  Don't forget pieces can be rotated!
+
+
+Plan
+----
+
+Pick random piece
+Pick random next piece
+Zero score
+
+Draw board
+Draw score
+Draw next piece
+Draw piece
+Wait for timer
+If left key then move piece left, check for edge of board and blocks
+Else if right key then move piece right, check for edge of board and blocks
+If rotate key then rotate piece, check for edge of board and blocks
+If drop key then drop piece till it overlaps a block or goes off board
+Else move piece down
+If piece overlaps blocks on board or goes off board then
+	Move piece back up one line, if piece goes off top of board then game over
+	Copy piece to board
+	Copy next piece to piece
+	Pick random next piece
+	Check for complete lines
+	If complete line then
+		Remove complete line and move other lines down
+		Award score
+Repeat
+
+
+Score
+-----
+
+award =
+1 line: 100  (100 / line)
+2 line: 300  (150 / line)
+3 line: 600  (200 / line)
+Tetris: 1000 (250 / line)
+
+Dropping piece full height of board to complete a line doubles score:
+BOARDHEIGHT = 20
+score += level * (distance / BOARDHEIGHT * award + award)
+
+award = 100
+distance = 19
+score += 195
+distance = 10
+score += 150
+distance = 2
+score += 110
+distance = 1
+score += 105
+
+
+Files
+-----
+
+bloc.c
+bloc.h
+piece.c
+piece.h
+board.c
+board.h
+
+
+Keys
+----
+
+Left - move piece left
+Right - move piece right
+Up - rotate piece clockwise
+Down - soft drop
+Space - hard drop
+
+
+Notes
+-----
+
+Drop is hard drop, no animation; piece appears in its final place.
+Movement is not synched with game tick.  Use a counter to keep track of when 
+to move the piece.
+Similarly gravity has a counter to keep track of when to move the piece down.
+Gravity defines game difficulty.
+Game tick is 10ms, the lowest granularity recommended in SDL documentation.
+
+
+Movement
+--------
+
+Move piece on key down, record movement direction, start countdown
+Each tick subtract from countdown
+If countdown reaches zero, move piece again and restart countdown
+On key up zero movement direction and stop countdown
+
+
+Difficulty
+----------
+
+Gravity starts as certain number of game ticks; piece drops when gravity 
+counter reaches zero.
+Difficulty increases by decreasing the value gravity starts at
+
+
+Bitmap Font
+-----------
+
+Function takes a null-terminated string and origin
+Walk along string
+For each letter blit corresponding bitmap and move x position along
+No word wrap
+
+
+Text
+----
+
+Up to 10 digits
+
+Level:
+         1
+
+Score:
+    920394
+
+
+Menu
+----
+
+Main menu
+-> New game
+-> Escape or game over
+-> If high score then
+	-> High scores
+	-> Enter score
+	-> Any key
+	-> Main menu
+else
+	-> Main menu
+
+Main menu
+-> Instructions
+-> Any key 
+-> Main menu
+
+Main menu
+-> High scores
+-> Any key
+-> Main menu
+
+Main menu
+-> Exit or escape
+-> Exit bloc

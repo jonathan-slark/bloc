@@ -7,6 +7,8 @@ See `LICENSE.txt` for copyright and licensing details.
 
 `bloc` is a falling-block puzzle game inspired by a well-known classic. While the core gameplay remains familiar, it features a custom scoring system. This game was developed as a learning project in game programming and is not intended as an official version.
 
+![bloc screenshot](image/screeshot.png)
+
 ### Quick Start Guide
 
 - **Up arrow** - Rotate

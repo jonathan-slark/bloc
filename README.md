@@ -16,25 +16,25 @@ See `LICENSE.txt` for copyright and licensing details.
 - **Space bar** - Hard drop
 - **Escape** - Quit
 
-For detailedd gameplay instructions, select *Instructions* from the in-game menu. Navigate the menus using the arrow keys and confirm slections with *Return*.
+For detailed gameplay instructions, select *Instructions* from the in-game menu. Navigate the menus using the arrow keys and confirm slections with *Return*.
 
-### Running the Game
+## Running the Game
 
-## Windows
+### Windows
 
 1. Extract all files to a directory.
 2. Run `bloc.exe`.
 
-## Unix-like Systems
+### Unix-like Systems
 
-### Requirements
+#### Requirements
 
 - SDL 1.2 + development files
 - SDL_image 1.2 + development files
 - GCC
 - Make
 
-### Build Instructions
+#### Build Instructions
 
 1. Extract the tarball.
 2. Open a terminal and run:

@@ -1,0 +1,4 @@
+*.exe
+*.o
+*.un~
+scores.txt
